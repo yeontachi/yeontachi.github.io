@@ -2,7 +2,7 @@
 layout: single
 title: "[알고리즘] Union-Find 유니온 파인드"
 categories: Algorithm
-tag: [Graph, Algorithm, Set]
+tag: [Graph, Algorithm, Set, C++]
 ---
 
 # 유니온 파인드
@@ -40,6 +40,48 @@ tag: [Graph, Algorithm, Set]
 **(3) find 연산 진행**
 
 ![Alt text](/assets/images/unionfind4.png)
+
+## 코드 구현
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int parent[7];
+void unionfunc(int a, int b);
+int Find(int a);
+
+void unionfunc(int a, int b){//유니온 연산 : 바로 연결 x 대표 노드끼리 연결
+    a = Find(a);
+    b = Find(b);
+
+    if(a != b) parent[b] = a;
+}
+
+int Find(int a){ // 대표 노드를 찾아서 반환
+    if(a == parent[a]) return a;
+    else {
+        return parent[a] = Find(parent[a]); // 경로 압축
+    }
+}
+
+int main(void){
+    for(int i=1; i<7; i++){
+        parent[i] = i; //대표 노드를 자기 자신으로 초기화하기
+    }
+
+    unionfunc(1, 4); // parent[4] = 1
+    unionfunc(5, 6); // parent[6] = 5
+    unionfunc(4, 6); // parent[6] = 1
+    Find(6);//index 6의 value를 대표 노드 값 1로 업데이트
+
+    for(int i=1; i<7; i++){
+        cout<<parent[i]<<" ";// 출력 결과 : 1 2 3 1 1 1
+    }
+
+    return 0;
+}
+```
 
 ### Reference
 - Do it! 알고리즘 코딩 테스트 (c++) 
