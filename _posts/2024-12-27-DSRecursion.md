@@ -3,6 +3,7 @@ layout: single
 title: "[자료구조] 재귀(Recursion)"
 categories: DataStructure
 tag: [Data Structure, Recursion]
+toc: true
 ---
 
 재귀 함수는 **"자기 자신을 호출하는 함수"**를 의미한다. 간결하고 효율적인 코드를 작성하는 데 유용하다. 특히 트리나 그래프와 같은 계층적 구조의 탐색, 분할 정복 알고리즘, 그리고 복잡한 수학적 계산에서 자주 사용된다.

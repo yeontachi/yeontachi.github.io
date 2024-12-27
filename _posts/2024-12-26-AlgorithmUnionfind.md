@@ -3,6 +3,7 @@ layout: single
 title: "[알고리즘] Union-Find 유니온 파인드"
 categories: Algorithm
 tag: [Graph, Algorithm, Set, C++]
+toc: true
 ---
 
 # 유니온 파인드
