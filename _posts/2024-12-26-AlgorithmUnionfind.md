@@ -87,7 +87,9 @@ int main(void){
 ## 유니온 파인드를 사용하는 문제들(feat. 백준)
 
 [BOJ 1717 : 집합의 표현](https://www.acmicpc.net/problem/1717)
+
 [BOJ 1976 : 여행 가자](https://www.acmicpc.net/problem/1976)
+
 [BOJ 1043 : 거짓말](https://www.acmicpc.net/problem/1043)
 
 ## Reference
