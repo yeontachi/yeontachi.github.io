@@ -142,6 +142,59 @@ int main(void){
  ![Alt text](/assets/images/Fiboseqe.png)
 
 
+### 이진 탐색 알고리즘의 재귀적 구현
+
+ **이진 탐색 알고리즘이란?**
+ - 이진 탐색(Binary Search)은 정렬된 배열이나 리스트에서 특정 값을 효율적으로 찾기 위해 사용되는 알고리즘이다. 
+ - **동작 원리**
+   1. 중간값 선택 : 배열의 중간값을 선택한다.
+   2. 비교 : 찾고자 하는 값(target)과 중간값을 비교한다.
+      - target == 중간값 : 찾는 값을 발견한 경우
+      - target < 중간값 : 찾는 값이 중간값보다 작으면, 중간값의 왼쪽 부분 배열에서 탐색을 계속한다.
+      - target > 중간값 : 찾는 값이 중간값보다 크면, 중간값의 오른쪽 부분 배열에서 탐색을 계속한다.
+   3. 반복 : 위 과정을 배열의 탐색 범위가 하나로 줄어들 때까지 반복한다.
+   4. 값 없음 : 배열을 모두 탐색했음에도 값을 찾지 못한 경우, 해당 값은 배열에 없다.
+
+**이진 탐색은 데이터가 오름차순 또는 내림차순으로 정렬되어 있어야만 사용할 수 있다.**
+
+아래는 이진 탐색 알고리즘을 재귀적으로 구현한 코드이다.
+
+```c
+#include <stdio.h>
+
+int BSearchRecursive(int ar[], int first, int last, int target){
+    int mid;
+    if(first>last) return -1; //-1 반환은 탐색의 실패를 의미한다.
+    mid=(first+last)/2; //탐색 대상의 중간값 찾기
+
+    if(ar[mid] == target) return mid; //탐색된 타켓의 인덱스 값을 반환
+    else if(target<ar[mid]) return BSearchRecursive(ar, first, mid-1, target); 
+    //target이 중간값보다 작으면 왼쪽 부분으로 탐색 범위를 줄이고 탐색
+    //왼쪽 부분으로 탐색 범위를 줄이기 위해 기존 last자리를 mid-1 로 대체
+    else return BSearchRecursive(ar, mid+1, last, target);
+    //target이 중간값보다 크면 오른쪽 부분으로 탐색 범위를 줄이고 탐색
+    //오른쪽 부분으로 탐색 범위를 줄이기 위해 기존 start자리를 mid+1로 대체
+}
+
+int main(void){
+    int arr[]={1,3,5,7,9};
+    int idx;
+
+    idx=BSearchRecursive(arr, 0, sizeof(arr)/sizeof(int)-1, 7);
+    if(idx == -1) printf("탐색 실패\n");
+    else printf("타켓 저장 인덱스 : %d \n", idx);
+
+    idx=BSearchRecursive(arr, 0, sizeof(arr)/sizeof(int)-1, 4);
+    if(idx == -1) printf("탐색 실패\n");
+    else printf("타켓 저장 인덱스 : %d \n", idx);
+
+    return 0;
+}
+```
+
+## Reference 
+ - 윤성우의 열혈 자료구조
+ - Computer Systems : A Programmer's Perspective
 
   
 
