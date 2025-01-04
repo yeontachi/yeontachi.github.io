@@ -39,7 +39,7 @@ toc: true
 - **픽셀(Pixel)** : 영상을 구성하는 최소 단위 (== 화소)
     - 하나의 픽셀은 하나의 밝기 또는 색상을 표현하며, 이러한 픽셀이 모여서 2차원 영상을 구성한다.
 
-[Alt text](/assets/CVimages/image_coordination_system.png)
+![Alt text](/assets/CVimages/image_coordination_system.png)
 
 - 영상은 픽셀이 바둑판 처럼 균일한 격자 형태로 배열되어 있는 형태로 표현된다.
 - 영상을 표현하는 2차원 xy 좌표계에서 x좌표는 왼쪽에서 오른쪽으로 증가하고, y좌표는 위에서 아래로 증가한다. 위 그림은 가로 크기가 w이고, 세로 크기가 h인 영상이다.
