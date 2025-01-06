@@ -47,3 +47,100 @@ toc: true
  ![Alt text](/assets/images/2_1ex.png)
  
  부호 없는 정수로 표현할 수 있는 값의 범위는 w-비트에 따라 달라진다. 최소값은 비트 벡터가 모두 0인 경우이며, 최대값은 모든 비트가 1인 경우로, 이를 2<sup>w</sup> - 1로 계산할 수 있다. 
+
+ **B2U<sub>w</sub>** 함수는 **고유성(Uniqueness)**을 보장한다. 즉, 각 비트 벡터는 고유한 숫자 값에 매핑되며, 반대로 각 숫자 값도 고유한 비트 벡터에 매핑된다. 이러한 매핑은 **전단사 함수(bijection)**로 정의되며,  **B2U<sub>w</sub>**의 역함수  **U2B<sub>w</sub>**를 통해 숫자에서 비트 벡터로 변환이 가능하다. 
+
+ 결론적으로  **B2U<sub>w</sub>** 함수는 비트 벡터를 부호 없는 정수로 변환하는 데 사용되며, 최소값 0에서 최대값 2<sup>w</sup> - 1 까지의 범위를 가진 숫자와 비트 벡터 간의 고유한 매핑을 제공한다.
+
+ ### 2.2.3 Two's-Complement Encodings
+
+ 컴퓨터에서 정수를 표현하는 가장 일반적인 방법 중 하나는 **2의 보수(Two's Complement)** 방식이다. 이 방식은 가장 높은 비트(MSB, most significant bit)를 음수 가중체를 가지는 부호 비트(sign bit)로 해석하여 음수와 양수를 모두 표현할 수 있다. 2의 보수 표현을 수학적으로 정의한 함수 **B2T<sub>w</sub>**는 다음과 같이 정의된다.
+
+ ![Alt text](/assets/images/equation2_3.png)
+
+ 여기서 x<sub>w-1</sub>은 부호 비트를 나타내며, 1일 경우 음수를, 0일 경우 양수나 0을 나타낸다. 이 정의는 비트 벡터를 음수와 양수로 매핑한다.
+
+ w-비트 숫자의 범위는 **TMin<sub>w</sub> = -2<sub>w-1</sub>**부터 **TMax<sub>w</sub> = -2<sub>w-1</sub> - 1**이다.
+
+ ![Alt text](/assets/images/2_3ex.png)
+
+ 이 방식에서 비트 벡터는 유일한 숫자 값에 매핑되며, 역함수 **T2B<sub>w</sub>**를 통해 숫자를 비트 벡터로 변환할 수 있다. 이는 **전단사 함수(bijection)**로, 각 수자는 고유한 비트 벡터로 표현된다.
+
+ ![Alt text](/assets/images/Figure2_13.png)
+
+#### 2의 보수 범위의 특징
+
+![Alt text](/assets/images/Figure2_14.png)
+
+ 1. **비대칭적 범위**
+    - 0이 양수로 포함되기 때문에, 음수의 범위는 양수보다 하나 더 많다.(|**TMin**| = |**TMax**| + 1).
+ 2. **최대값과 최소값**
+    - 최대값 : **TMax<sub>w</sub> = -2<sub>w-1</sub> - 1**
+    - 최소값 : **TMin<sub>w</sub> = -2<sub>w-1</sub>**
+ 3. **비트 패턴 비교**
+    - 2의 보수와 부호 없는 값의 비트 패턴은 동일하지만, 해석 방식이 다르다.
+    - 예를 들어, 2의 보수에서 -1은 부호 없는 값의 최대값(**UMax**)과 동일한 비트 패턴을 가진다.
+
+C 표준은 2의 보수 방식을 필수로 요구하지 않지만, 대부분의 시스템은 2의 보수를 사용한다. Java는 2의 보수를 필수로 요구하며, 데이터 타입의 범위와 표현 방식을 명확히 정의한다.
+
+#### 코드 예제
+
+ ```c
+short x = 12345;
+short mx = -x;
+
+show_bytes((byte_pointer) &x, sizeof(short));
+show_bytes((byte_pointer) &mx, sizeof(short));
+```
+
+![Alt text](/assets/images/Figure2_15.png)
+
+ - x = 12345는 16진수로 **0x3039**, 이진수로 [0011000000111001]
+ - mx = -12345는 16진수로 **0xCFC7**, 이진수로 [1100111111000111]
+
+### 2.2.4 Conversions between Signed and Unsigned
+
+ C언어에서는 부호 있는 정수(Signed)와 부호 없는 정수(Unsigned) 간의 **캐스팅(Casting)**이 가능하다. 캐스팅은 **비트 패턴은 유지하되, 숫자 해석 방식을 변경**한다. 이 변환은 **비트 레벨 관점**에서 이루어져, 숫자 값이 변할 수 있지만, **비트 패턴은 동일**하다.
+
+#### 부호 있는 값에서 부호 없는 값으로 변환 (T2U)
+
+ 부호 있는 값에서 부호 없는 값으로 변환 시, 음수는 부호 없는 양수로 변환된다.
+
+ ```c
+ short int v = -12345;
+ unsigned short uv = (unsigned short)v;
+ printf("v = %d, uv = %u\n", v, uv);
+ ```
+
+ 출력 결과 : **v = -12345, uv = 53191**
+
+ **T2U<sub>16</sub>(-12345) = -12345 + 2<sup>16</sup> = 53191**
+
+ **T2U 함수의 수학적 정의**
+
+ ![Alt text](/assets/images/equation2_5.png)
+
+ **T2U<sub>16</sub>(-12345) = -12345 + 2<sup>16</sup> = 53191**
+ **T2U<sub>32</sub>(-1) = -1 + 2<sup>32</sup> = 4294967295**
+
+ ![Alt text](/assets/images/Figure2_17.png)
+
+#### 부호 없는 값에서 부호 있는 값으로 변환 (U2T)
+
+ 부호 없는 값에서 부호 있는 값으로 변환 시, **TMax**보다 큰 값은 음수로 변환된다.
+
+ ```c
+ unsigned u = 4294967295; /* UMax */
+ int tu = (int)u;
+ printf("u = %u, tu = %d\n", u, tu);
+ ```
+
+ 출력 결과 : **u = 4294967295, tu = -1**
+
+ **U2T<sub>32</sub>(4294967295) = 4294967295 + 2<sup>32</sup> = -1**
+
+ ![Alt text](/assets/images/equation2_7.png)
+
+ ![Alt text](/assets/images/Figure2_18.png)
+
+
