@@ -2,7 +2,7 @@
 layout: single
 title: "[알고리즘] 소수 구하기 - 에라토스테네스의 체"
 categories: Algorithm
-tag: [Math, Algorithm, C++, CS]
+tag: [Math, PrimeNumber, Algorithm, C++, CS]
 toc: true
 ---
 
