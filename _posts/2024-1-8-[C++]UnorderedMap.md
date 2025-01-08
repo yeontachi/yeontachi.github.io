@@ -108,7 +108,7 @@ if (umap.find("apple") != umap.end()) {
 - 출력 순서는 삽입 순서와 관계없이 랜덤이다.(해시 테이블 기반)
 
 ```cpp
-unordered_map<string, int> umap = {{"apple", 3}, {"banana", 5}, {"cherry", 7}};
+unordered_map<string, int> umap = { {"apple", 3}, {"banana", 5}, {"cherry", 7} };
 
 for (const auto &pair : umap) {
     cout << pair.first << ": " << pair.second << endl;
@@ -118,7 +118,7 @@ for (const auto &pair : umap) {
 ### 4. 데이터 삭제
 
 ```cpp
-unordered_map<string, int> umap = {{"apple", 3}, {"banana", 5}, {"cherry", 7}};
+unordered_map<string, int> umap = { {"apple", 3}, {"banana", 5}, {"cherry", 7} };
 
 // 특정 키 삭제
 umap.erase("banana");
