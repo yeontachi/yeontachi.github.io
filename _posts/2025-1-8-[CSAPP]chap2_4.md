@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[CS:APP] Chap2 A Representing and Manipulating Information(4)"
+title: "[CS:APP] Chap2 A Representing and Manipulating Information(4)-Floating Point"
 categories: ComputerSystems
 tag: [CS, CSAPP]
 toc: true

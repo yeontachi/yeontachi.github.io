@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[CS:APP] Chap2 A Representing and Manipulating Information(3)"
+title: "[CS:APP] Chap2 A Representing and Manipulating Information(3)-Integer Aritmetic"
 categories: ComputerSystems
 tag: [CS, CSAPP]
 toc: true
