@@ -73,17 +73,18 @@ using namespace std;
 long long eulerPhi(int n){
     int result = n;
 
-    for(int p = 2; p<=sqrt(n); p++){
-        if(n%p==0){
-            result=result-result/p;
-
+    for(int p = 2; p<=sqrt(n); p++){//제곱근까지만 진행
+        if(n%p==0){//p가 소인수인지 확인
+            result=result-result/p;//결괏값 업데이트
+            //해당 소인수 지우기(2^7*11이면 2^7없애고 11만 남김
             while(n%p==0){
                 n/=p;
             }
         }
     }
 
-    if(n>1) result -= result / n;
+    if(n>1) result -= result / n;..아직 소인수 구성이 남아있는 경우
+    //반복문에서 제곱근까지만 탐색했기 때문에 1개의 소인수가 누락되는 케이스
 
     return result;
 }
