@@ -28,25 +28,39 @@ toc: true
 
 ![Alt text](/assets/Alimages/gcd.png)
 
+## 최소 공배수 구하기
+
+유클리드 호제법을 사용하여 최소공배수(LCM)을 구하려면, 두 수의 최대공약수(GCD)를 먼저 계산하고 이를 이용해 LCM을 구할 수 있다. 최소 공배수는 아래와 같은 공식을 따른다.
+
+![Alt text](/assets/Alimages/LCM.png)
+
 ## 유클리드 호제법 코드 구현
 
 ```cpp
 #include <iostream>
+#include <cmath>
 using namespace std;
 
-int gcd(int a, int b){
+//최대 공약수(GCD)를 구하는 함수
+int gcd(int a, int b){ 
     if(b==0) return a;
 
     else return gcd(b, a%b);//재귀 형태로 구현
+}
+
+//최소 공배수(LCM)를 구하는 함수
+int lcm(int a, int b){ //최대공약수를 이용해 최소공배수를 구하는 공식 그대로 구현
+    return (abs(a*b)/gcd(a, b));
 }
 
 int main(void){
     int num1 = 18;
     int num2 = 27;
 
-    int result = gcd(18, 27);
+    int result1 = gcd(18, 27);
+    int result2 = lcm(18, 28);
 
-    cout<<result<<"\n"//출력 결과 : 9
+    cout<<result1<<" "<<result2<<"\n"//출력 결과 : 9 54
 
     return 0;
 }
