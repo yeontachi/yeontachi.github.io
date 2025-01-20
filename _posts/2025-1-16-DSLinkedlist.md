@@ -174,7 +174,7 @@ int LCount(List *plist);               // 데이터 개수 반환
 
 ### 연결리스트에서의 데이터 삽입
 
-#### 리스트 초기화
+**리스트 초기화** 
 
 ```c
 void ListInit(List *plist) {
@@ -211,10 +211,38 @@ void ListInit(List *plist) {
     }
 ```
 
-- 아래 그림과 같은 상태가 된다.
+- 다음 그림과 같이 head가 새로운 노드를 가리키는 상태가 된다.
 
 ![Alt text](/assets/DSimages/insert2.png)
 
+- 이어서 plist->tail = newNode; 문장을 실행하면
+
+![Alt text](/assets/DSimages/insert3.png)
+
+- 이렇게 첫 번째 노드의 추가가 완료된 상태이다.
+
+![Alt text](/assets/DSimages/insert4.png)
+
+- 위 그림에서 주목할 사실은 head와 tail이 첫 번쨰 노드를 가리키고 있다는 점이다. head는 리스트의 머리를 가리키고 tail은 리스트의 꼬리를 가리킨다. 노드가 몇 개가 더 추가되건 변함이 없어야하는 사실이다.
+
+- 두 번째 노드는 연결 리스트의 끝, 즉, tail이 가리키는 노드의 뒤에 연결되어야 하기 때문에 새 노드의 생성 및 초기화 이후에는 else 문에 담긴 문장을 실행하게 된다. 
+
+```c
+    else { // 리스트에 데이터가 있는 경우
+        plist->tail->next = newNode; // 끝 노드의 next가 새 노드를 가리킴
+        plist->tail = newNode;       // tail이 새 노드를 가리키도록 업데이트
+    }
+```
+
+- 새 노드에 저장된 값을 4로 가정할 경우 그 결과는 아래와 같다.
+
+![Alt text](/assets/DSimages/insert5.png)
+
+- 연결 리스트에서 head는 첫 번째 노드를, 그리고 tail은 마지막 노드를 가리킨다. 그리고 추가되는 노드들은 꼬리에 꼬리를 물어서 저장되기 때문에 2,4,6,8이 순서대로 저장이 되면 아래와 같은 모습을 띠게 된다.
+
+![Alt text](/assets/DSimages/insert6.png)
+
+- **데이터 삽입 전체 코드**
 
 ```c
 void LInsert(List *plist, LData data) {
@@ -234,10 +262,114 @@ void LInsert(List *plist, LData data) {
 }
 ```
 
+### 연결 리스트에서의 데이터 조회
 
+ 연결 리스트에서 데이터를 조회하려면 순차적으로 노드를 따라가면서 원하는 데이터를 찾아야 한다. 이를 위해 다음 두 가지 함수가 사용된다.
+ - **LFirst** : 리스트에서 첫 번째 데이터를 참조하는 함수
+ - **LNext** : 현재 위치에서 다음 데이터를 참조하는 함수
 
+ **LFirst 함수**
 
-### 전체 코드
+ ```c
+ int LFirst(List *plist, LData *pdata) {
+    if (plist->head == NULL) // 리스트가 비어 있으면 FALSE 반환
+        return FALSE;
+
+    plist->cur = plist->head; // 현재 노드를 첫 번째 노드로 설정
+    *pdata = plist->cur->data; // 첫 번째 데이터 저장
+    return TRUE;
+}
+ ```
+
+ - 먼저 **빈 리스트인지 확인**을 한다. (plist->head==NULL)이면 빈 리스트
+ - 첫 번째 노드로 초기화
+    - plist->cur 에 첫 번째 노드를 설정한다.
+    - plist->head 를 통해 첫 번째 노드에 접근한다.
+ - 데이터 반환
+    - 첫 번째 노드의 데이터를 pdata에 저장한다.
+    - TRUE를 반환하여 데이터 참조 성공을 알린다.
+
+- 위 함수가 TRUE를 반환하면 아래와 같은 상태가 된다.
+
+![Alt text](/assets/DSimages/LinkedListFirst.png)
+
+**LNext 함수**
+
+```c
+int LNext(List *plist, LData *pdata) {
+    if (plist->cur->next == NULL) // 다음 노드가 없으면 FALSE 반환
+        return FALSE;
+
+    plist->cur = plist->cur->next; // 현재 노드를 다음 노드로 이동
+    *pdata = plist->cur->data; // 다음 노드의 데이터 저장
+    return TRUE;
+}
+```
+
+- 위 함수의 핵심은 다음 문장에 있다. **plist->cur = plist->cur->next;**
+- 위 문장으로 인해서 cur은 아래와 같이 모든 노드를 가리키며 이동할 수 있게 된다.
+
+![Alt text](/assets/DSimages/LinkedListNext.png)
+
+- 이렇듯 연결리스트 구조체에서 생성된 **cur 노드**는 리스트 안을 돌아다닐 때 사용이 된다.
+
+### 연결 리스트에서의 데이터 삭제
+
+```c
+    Node *rpos = plist->cur;  // 삭제할 노드를 가리킴
+    LData rdata = rpos->data; // 삭제할 노드의 데이터
+```
+
+- cur 노드가 가리키고 있는 데이터를 삭제를 할 때, 삭제할 노드를 rpos에 저장해준다.
+
+- 아래 그림에서 볼 수 있듯이 4가 저장된 노드의 주소 값을 아는 것은 2가 저장된 노드가 유일한데, 이 노드를 그냥 소멸시키면 4가 저장된 노드의 주소 값은 어디에도 존재하지 않게 된다. 즉, cur 노드가 가리키고 있는 데이터를 그냥 삭제해 버리면, 그 다음 노드에 접근이 불가능해지기 때문에 rpos에 저장을 해주는 것이다.
+
+![Alt text](/assets/DSimages/LinkedListerror.png)
+
+- 삭제할 데이터는 rpos->data에 저장해준다.
+
+![Alt text](/assets/DSimages/LinkedListrpos.png)
+
+1. **삭제할 노드가 첫 번째 노드인 경우**
+
+```c
+    if (rpos == plist->head) { // 삭제할 노드가 첫 번째 노드인 경우
+        plist->head = plist->head->next; // head를 다음 노드로 이동
+        if (plist->head == NULL)         // 리스트가 비어 있으면 tail도 NULL
+            plist->tail = NULL;
+    } 
+```
+- 위 코드를 실행하면 아래와 같은 상태가 된다.
+
+![Alt text](/assets/DSimages/LinkedListdel1.png)
+
+2. **중간에 있는 노드를 삭제하는 경우**
+
+```c
+else { // 삭제할 노드가 첫 번째 노드가 아닌 경우
+        Node *prev = plist->head; // 이전 노드를 찾음
+        while (prev->next != plist->cur)
+            prev = prev->next;
+
+        prev->next = plist->cur->next; // 이전 노드의 next가 삭제할 노드의 다음 노드를 가리킴
+        if (plist->cur == plist->tail) // 삭제할 노드가 끝 노드인 경우
+            plist->tail = prev;        // tail을 이전 노드로 업데이트
+    }
+```
+
+- prev는 head가 가리키는 노드부터 시작하여 while문을 돌면서 cur가 가리키는 노드 이전 노드까지 탐색을 한다.
+
+![Alt text](/assets/DSimages/LinkedListdel2.png)
+
+- cur 이전 노드에 도착했으면 prev가 가리키는 노드의 다음 노드를 cur가 가리키는 노드의 다음 노드로 설정을 해준다.
+
+![Alt text](/assets/DSimages/LinkedListdel3.png)
+
+- 이후 현재 노드를 첫 번째 노드로 초기화하고, 메모리 해제를 해주면 최종적으로 아래와 같은 상태가 된다.
+
+![Alt text](/assets/DSimages/LinkedListdel4.png)
+
+## 전체 코드
 
 **LinkedList.c**
 
@@ -321,7 +453,6 @@ LData LRemove(List *plist) {
 int LCount(List *plist) {
     return plist->numOfData;
 }
-
 ```
 
 **main.c**
