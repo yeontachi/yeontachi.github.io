@@ -233,8 +233,8 @@ pascall은 이제 거의 쓰이지 않으며 인자를 스택에 넣을 때 왼�
  C++ 컴파일러는 제조사마다 네임 맹글링 방식이 다를 수 있으며 C 언어로 작성된 dll 파일 등을 C++로 작성된 프로그램에 링크할 때 링크되지 않는 문제가 발생할 수 있다. 이 경우 extern "C" 키워드를 활용하면 네임 맹글링 문제를 해결해서 링커가 함수를 찾지 못하는 문제를 해결할 수 있다.
 
 ## Reference
- - Computer Systems A Programmer's Perspecive | Randal E.Bryan
+ - Computer Systems A Programmer's Perspecive - Randal E.Bryan
  - 위키백과, 프로세스
  - 위키백과, 프로세스 제어블록
  - 위키백과, 네임 맹글링
- - C++로 나만의 운영체제 만들기 | 박주항
+ - C++로 나만의 운영체제 만들기 - 박주항
