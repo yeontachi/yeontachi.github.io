@@ -200,7 +200,7 @@ toc: true
 
  ![Alt text](/assets/OSimages/CallStack.png)
 
- CreateGenesisBlock 함수의 수행이 끝나면 이 함수를 호출한 실행 코드의 위치로 돌아갈 필요가 있다. 이때 필요한 값은 해당 함수의 복귀 주소와 EBP값이다. 이런 값들은 함수 호출 시마다 자동으로 생성되는데 이러한 값들의 모음을 **스택 프레임<sup>Stack Frame</sup>이라 부른다.
+ CreateGenesisBlock 함수의 수행이 끝나면 이 함수를 호출한 실행 코드의 위치로 돌아갈 필요가 있다. 이때 필요한 값은 해당 함수의 복귀 주소와 EBP값이다. 이런 값들은 함수 호출 시마다 자동으로 생성되는데 이러한 값들의 모음을 **스택 프레임<sup>Stack Frame</sup>**이라 부른다.
 
  - **ESP 레지스터** : 스택의 밑바닥을 가리키는 포인터다. 최초 함수가 호출될 때 **EBP<sup>Extended Base Pointer</sup>**와 **ESP<sup>Extended Stack Pointer</sup>**의 값은 같으며 로컬 변수가 선언되면 ESP는 낮은 값으로 증가한다.(x86 아키텍쳐의 경우). ESP는 다음 데이터를 Push할 위치가 아니라 Pop을 할 때 뽑아낼 데이터의 위치를 가리킨다.
  
