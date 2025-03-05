@@ -85,7 +85,7 @@ typedef struct _arrayStack{
 } ArrayStack;
 ```
 
-이 중에서 초기화할 멤버는 가장 마지막에 저장된 데이터의 위치를 가리키는 topIndexx 하나이다. 따라서 StackInit 함수는 다음과 같이 정의된댜.
+이 중에서 초기화할 멤버는 가장 마지막에 저장된 데이터의 위치를 가리키는 topIndex 하나이다. 따라서 StackInit 함수는 다음과 같이 정의된댜.
 
 ```c
 void StackInit(Stack *pstack){
