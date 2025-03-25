@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[컴퓨터 구조] MIPS 기반 컴퓨터 명령어 체계"
+title: "[컴퓨터 구조] MIPS 기반 컴퓨터 명령어 체계(1)"
 categories: ComputerArchitecture
 tag: [ComputerArchitecture, CS]
 toc: true
