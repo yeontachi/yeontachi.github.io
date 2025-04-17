@@ -21,7 +21,7 @@ title                    : "Yeontachi.log"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Yeontachi"
-description              : "An amazing website." 
+description              : "Yeontachi's Dev Blog." 
 url                      : "https://yeontachi.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
