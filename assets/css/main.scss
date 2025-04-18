@@ -41,3 +41,31 @@ search: false
     text-decoration: underline;
   }
   
+  // Table of Contents (TOC) 사이드바 스타일 조정
+.toc {
+  font-size: 0.88rem; // 기존보다 약간 작게
+  line-height: 1.5;
+}
+
+.toc .toc__menu {
+  padding: 0.5em 0;
+}
+
+.toc .toc__menu a {
+  padding: 0.3em 0.8em;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  font-weight: 400;
+}
+
+.toc .toc__menu a:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.toc .toc__menu .active {
+  font-weight: 600;
+  background-color: #e8e8e8;
+  border-radius: 5px;
+}
