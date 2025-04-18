@@ -1,5 +1,5 @@
 ---
 title: Search
 layout: Search
-permalink: Search
+permalink: /search/
 ---
