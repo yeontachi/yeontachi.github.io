@@ -1,5 +1,5 @@
 ---
-title: Search
+title: 🔍
 layout: search
 permalink: /search/
 ---
