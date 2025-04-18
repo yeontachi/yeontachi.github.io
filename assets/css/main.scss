@@ -1,5 +1,4 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 search: false
 ---
 
@@ -7,3 +6,38 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+.related-posts {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .related-posts h3 {
+    font-size: 1.1em;
+    margin-bottom: 0.8em;
+    color: #333;
+  }
+  
+  .related-posts-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .related-posts-list li {
+    margin-bottom: 0.5em;
+  }
+  
+  .related-posts-list a {
+    text-decoration: none;
+    color: #0057a0;
+    transition: all 0.2s ease;
+  }
+  
+  .related-posts-list a:hover {
+    color: #007acc;
+    text-decoration: underline;
+  }
+  

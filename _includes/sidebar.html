@@ -15,18 +15,20 @@
       {% include nav_list nav=page.sidebar.nav %}
     {% endif %}
     {% if page.categories %}
-  <div class="sidebar-section">
-    <h3>같은 카테고리의 글</h3>
-    <ul>
-      {% assign current_category = page.categories[0] %}
-      {% for post in site.posts %}
-        {% if post.categories contains current_category and post.url != page.url %}
-          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
+    <div class="sidebar-section related-posts">
+      <h3>같은 카테고리의 글</h3>
+      <ul class="related-posts-list">
+        {% assign current_category = page.categories[0] %}
+        {% for post in site.posts %}
+          {% if post.categories contains current_category and post.url != page.url %}
+            <li>
+              <a href="{{ post.url }}">{{ post.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>  
+  {% endif %}
 
   {% endif %}
   </div>
