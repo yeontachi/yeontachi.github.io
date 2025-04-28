@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yeontachi.github.io/sitemap.xml
